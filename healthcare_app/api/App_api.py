@@ -1,6 +1,6 @@
 import frappe
 
-@frappe.whitelist()
+@frappe.whitelist(allow_guest=True)
 def get_doctors():
     """
     Returns a list of all Healthcare Practitioners with first_name, department, and image.

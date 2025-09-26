@@ -1,13 +1,17 @@
 <template>
-<section class="relative bg-cover bg-center min-h-[70vh] lg:h-[90vh] flex items-center" style="background-image: url('/images/Banner image.png');">
+<section class="relative min-h-[70vh] lg:h-[90vh] flex items-center">
+    <!-- Image -->
+    <img src="https://qtest.quantumberg.com/files/Banner_image_50.png" 
+         alt="Banner" 
+         class="absolute inset-0 w-full h-full object-cover z-0">
+
     <!-- Overlay -->
-    <div class="absolute inset-0 bg-white/50"></div>
+    <div class="absolute inset-0 bg-white/50 z-10"></div>
 
     <!-- Content -->
-    <div class="relative container mx-auto px-6 lg:px-20 flex flex-col lg:flex-row items-center justify-between w-full">
+    <div class="relative container mx-auto px-6 lg:px-20 flex flex-col lg:flex-row items-center justify-between w-full z-20">
         <!-- Left Side Text -->
         <div class="max-w-lg text-center lg:text-left space-y-4 sm:space-y-6 lg:ml-12 mx-auto mb-5">
-
             <p class="uppercase tracking-wider text-sky-600 font-bold text-[18px]">
                 Caring for Life
             </p>
@@ -15,13 +19,13 @@
                 Leading the Way <br />
                 in <span class="text-sky-600">Medical Excellence</span>
             </h1>
-           <RouterLink to="/services" class="bg-sky-200 text-blue-900 px-5 sm:px-6 py-2 sm:py-3 rounded-full font-medium hover:bg-sky-300 transition text-sm sm:text-base inline-block text-center">
-               Our Services
+            <RouterLink to="/services" class="bg-sky-200 text-blue-900 px-5 sm:px-6 py-2 sm:py-3 rounded-full font-medium hover:bg-sky-300 transition text-sm sm:text-base inline-block text-center">
+                Our Services
             </RouterLink>
-
         </div>
     </div>
 </section>
+
 
 <!-- Cards Section (half inside banner, half outside) -->
 <div class="-mt-16 relative z-10 px-4 sm:px-6 lg:px-20">
@@ -231,7 +235,7 @@
         </div>
     </div>
 </div>
-<section class="mt-4 relative w-full bg-cover bg-center" style="background-image: url('/images/bgDoctor.png');">
+<section class="mt-4 relative w-full bg-cover bg-center" style="background-image: url('https://qtest.quantumberg.com/files/bgDoctor.png');">
     <div class="absolute inset-0 bg-white bg-opacity-50"></div>
 
     <div class="relative max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-2 items-center gap-8 px-6 py-12">

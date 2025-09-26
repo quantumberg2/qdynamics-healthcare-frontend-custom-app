@@ -12,65 +12,66 @@
     </div>
   </section>
 
-  <section class="py-10 px-6 max-w-5xl mx-auto">
-    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-      <div
-        v-for="doctor in doctors"
-        :key="doctor.id"
-        class="bg-white shadow-md rounded-lg overflow-hidden"
-      >
-        <!-- Doctor Image -->
-        <img
-          :src="doctor.image"
-          :alt="doctor.doctor_name"
-          class="w-full h-64 object-cover"
-        />
+<section class="py-10 px-6 max-w-5xl mx-auto">
+  <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+    <div
+      v-for="(doctor, index) in doctors"
+      :key="index"
+      class="bg-white shadow-md rounded-lg overflow-hidden"
+    >
+      <!-- Doctor Image -->
+      <img
+        :src="doctor.image"
+        :alt="doctor.first_name"
+        class="w-full h-64 object-cover"
+      />
 
-        <!-- Info Section -->
-        <div class="bg-blue-100 text-center py-4">
-          <h3 class="text-gray-800 font-semibold">
-            {{ doctor.doctor_name }}
-          </h3>
-          <p class="text-blue-900 font-bold tracking-widest text-sm">
-            {{ doctor.specialization }}
-          </p>
+      <!-- Info Section -->
+      <div class="bg-blue-100 text-center py-4">
+        <h3 class="text-gray-800 font-semibold">
+          {{ doctor.first_name }}
+        </h3>
+        <p class="text-blue-900 font-bold tracking-widest text-sm">
+          {{ doctor.department }}
+        </p>
 
-          <!-- Social Icons -->
-          <div class="flex justify-center space-x-4 mt-3">
-            <a
-              v-if="doctor.linkedin"
-              :href="doctor.linkedin"
-              target="_blank"
-              class="text-gray-600 hover:text-blue-600"
-            >
-              <i class="fab fa-linkedin"></i>
-            </a>
-            <a
-              v-if="doctor.facebook"
-              :href="doctor.facebook"
-              target="_blank"
-              class="text-gray-600 hover:text-blue-600"
-            >
-              <i class="fab fa-facebook"></i>
-            </a>
-            <a
-              v-if="doctor.twitter"
-              :href="doctor.twitter"
-              target="_blank"
-              class="text-gray-600 hover:text-blue-600"
-            >
-              <i class="fab fa-twitter"></i>
-            </a>
-          </div>
-        </div>
-
-        <!-- Button -->
-        <div class="bg-blue-900 text-center py-2">
-          <button class="text-white font-medium">View Profile</button>
+        <!-- Social Icons -->
+        <div class="flex justify-center space-x-4 mt-3">
+          <a
+            v-if="doctor.linkedin"
+            :href="doctor.linkedin"
+            target="_blank"
+            class="text-gray-600 hover:text-blue-600"
+          >
+            <i class="fab fa-linkedin"></i>
+          </a>
+          <a
+            v-if="doctor.facebook"
+            :href="doctor.facebook"
+            target="_blank"
+            class="text-gray-600 hover:text-blue-600"
+          >
+            <i class="fab fa-facebook"></i>
+          </a>
+          <a
+            v-if="doctor.twitter"
+            :href="doctor.twitter"
+            target="_blank"
+            class="text-gray-600 hover:text-blue-600"
+          >
+            <i class="fab fa-twitter"></i>
+          </a>
         </div>
       </div>
+
+      <!-- Button -->
+      <div class="bg-blue-900 text-center py-2">
+        <button class="text-white font-medium">View Profile</button>
+      </div>
     </div>
-  </section>
+  </div>
+</section>
+
 
   <section
     class="mb-3 relative w-full bg-cover bg-center h-80 flex items-center justify-center"
