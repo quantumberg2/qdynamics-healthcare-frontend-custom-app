@@ -12,7 +12,7 @@
     </div>
   </section>
 
-<section class="py-10 px-6 max-w-5xl mx-auto">
+<section class="py-10 px-4 max-w-5xl mx-auto">
   <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
     <div
       v-for="(doctor, index) in doctors"
@@ -21,22 +21,21 @@
     >
       <!-- Doctor Image -->
       <img
-        :src="doctor.image"
-        :alt="doctor.first_name"
-        class="w-full h-64 object-cover"
-      />
+  :src="doctor.image"
+  :alt="doctor.first_name"
+  class="w-full h-64"
+  loading="lazy"
+/>
 
       <!-- Info Section -->
-      <div class="bg-blue-100 text-center py-4">
-        <h3 class="text-gray-800 font-semibold">
-          {{ doctor.first_name }}
-        </h3>
-        <p class="text-blue-900 font-bold tracking-widest text-sm">
-          {{ doctor.department }}
-        </p>
+      <div class="bg-blue-100 text-center py-2">
+      <h3 class="text-gray-800 font-semibold">{{ doctor.first_name }}</h3>
+            <p class="text-blue-800 font-bold tracking-widest uppercase">
+              {{ doctor.department }}
+            </p>
 
         <!-- Social Icons -->
-        <div class="flex justify-center space-x-4 mt-3">
+        <div class="flex justify-center space-x-4 mt-2">
           <a
             v-if="doctor.linkedin"
             :href="doctor.linkedin"
@@ -65,9 +64,16 @@
       </div>
 
       <!-- Button -->
-      <div class="bg-blue-900 text-center py-2">
-        <button class="text-white font-medium">View Profile</button>
-      </div>
+    <div class="bg-blue-900 text-center py-2">
+<router-link
+  :to="{ name: 'ViewProfile', params: { id: doctor.name } }"
+  class="block w-full bg-blue-900 text-white py-2 font-medium text-center hover:bg-blue-800"
+>
+  View Profile
+</router-link>
+
+</div>
+
     </div>
   </div>
 </section>

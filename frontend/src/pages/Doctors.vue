@@ -1,5 +1,5 @@
 <template>
-  <section class="py-6 bg-white ">
+  <section class="py-6 bg-white">
     <!-- Heading -->
     <div class="text-center mb-10">
       <h4 class="text-sm font-bold tracking-widest text-blue-600 uppercase">
@@ -23,33 +23,35 @@
         <div class="bg-white rounded-lg shadow-md overflow-hidden flex flex-col">
           <!-- Image -->
           <img
-            :src="doctor.image"
-            alt="doctor"
+            :src="doctor.image || '/images/placeholder-doctor.jpg'"
+            :alt="doctor.first_name"
             class="w-full h-64 object-cover"
-             loading="lazy"
+            loading="lazy"
           />
 
           <!-- Info Section -->
-          <div class="bg-blue-100 text-center py-4">
-            <h3 class="text-gray-800 font-semibold">{{ doctor.name }}</h3>
+          <div class="bg-blue-100 text-center py-1">
+            <h3 class="text-gray-800 font-semibold">{{ doctor.first_name }}</h3>
             <p class="text-blue-800 font-bold tracking-widest uppercase">
-              {{ doctor.speciality }}
+              {{ doctor.department }}
             </p>
 
             <!-- Social Links -->
-            <div class="flex justify-center space-x-4 mt-3 text-gray-600">
-              <a href="#"><i class="fab fa-linkedin-in"></i></a>
-              <a href="#"><i class="fab fa-facebook-f"></i></a>
-              <a href="#"><i class="fab fa-instagram"></i></a>
+            <div class="flex justify-center space-x-4 mt-2 text-gray-600">
+              <a v-if="doctor.linkedin" :href="doctor.linkedin" target="_blank"><i class="fab fa-linkedin-in"></i></a>
+              <a v-if="doctor.facebook" :href="doctor.facebook" target="_blank"><i class="fab fa-facebook-f"></i></a>
+              <a v-if="doctor.twitter" :href="doctor.twitter" target="_blank"><i class="fab fa-twitter"></i></a>
             </div>
           </div>
 
           <!-- View Profile -->
-          <button
-            class="w-full bg-blue-900 text-white py-2 font-medium hover:bg-blue-800"
-          >
-            View Profile
-          </button>
+      <router-link
+  :to="{ name: 'ViewProfile', params: { id: doctor.name } }"
+  class="block w-full bg-blue-900 text-white py-2 font-medium text-center hover:bg-blue-800"
+>
+  View Profile
+</router-link>
+
         </div>
       </Slide>
 
@@ -74,26 +76,33 @@ export default {
   },
   data() {
     return {
-      doctors: [
-        { name: "Doctor 1", speciality: "Neurology", image: "/images/doctor1.jpg" },
-        { name: "Doctor 2", speciality: "Neurology", image: "/images/doctor2.jpg" },
-        { name: "Doctor 3", speciality: "Neurology", image: "/images/doctor3.jpg" },
-        { name: "Doctor 4", speciality: "Neurology", image: "/images/doctor1.jpg" },
-        { name: "Doctor 5", speciality: "Neurology", image: "/images/doctor2.jpg" },
-        { name: "Doctor 6", speciality: "Neurology", image: "/images/doctor3.jpg" },
-      ],
+      doctors: [],
     };
+  },
+  methods: {
+    async fetchDoctors() {
+      try {
+        const res = await fetch(
+          "/api/method/healthcare_app.api.App_api.get_doctors"
+        );
+        const data = await res.json();
+        this.doctors = data.message || [];
+      } catch (err) {
+        console.error("Failed to fetch doctors:", err);
+      }
+    },
+  },
+  mounted() {
+    this.fetchDoctors();
   },
 };
 </script>
 
 <style scoped>
-/* Fix slide spacing */
 .carousel__slide {
   padding: 0 !important;
 }
 
-/* Ensure equal card widths */
 .carousel__viewport {
   overflow: hidden;
 }
@@ -104,15 +113,15 @@ export default {
   flex: 1 0 auto;
 }
 .carousel__pagination {
-    display: flex;
-    gap: var(--vc-pgn-gap);
-    justify-content: center;
-    left: 50%;
-    list-style: none;
-    margin: 0;
-    padding: 0;
-    position: absolute;
-    transform: translateX(-50%);
-    bottom: -16px !important;
+  display: flex;
+  gap: var(--vc-pgn-gap);
+  justify-content: center;
+  left: 50%;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  position: absolute;
+  transform: translateX(-50%);
+  bottom: -16px !important;
 }
 </style>

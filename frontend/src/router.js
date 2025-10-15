@@ -10,6 +10,8 @@ import ContactUs from './pages/ContactUs.vue'
 import AppointmentPage from './pages/AppointmentPage.vue'
 import SingleServicePage from './pages/SingleServicePage.vue'
 import BackToTop from './pages/BackToTop.vue'
+import ViewProfile from './pages/ViewProfile.vue'
+import HomePageServices from './pages/HomePageServices.vue'
 const routes = [
     {
     path: '/',
@@ -58,15 +60,27 @@ const routes = [
     name: 'AppointmentPage',
     component: AppointmentPage,
   },
-   {
-    path: '/singleServicePage',
-    name: 'SingleServicePage',
-    component: SingleServicePage,
-  },
+    {
+  path: '/services/:department',
+  name: 'SingleServicePage',
+  component: SingleServicePage,
+  props: true, // allows passing route params as props
+},
   {
     path: '/backToTop',
     name: 'BackToTop',
     component: BackToTop,
+  },
+    {
+    path: '/viewProfile/:id',
+    name: 'ViewProfile',
+    component: ViewProfile,
+    props: true,
+  },
+   {
+    path: '/homePageServices',
+    name: 'HomePageServices',
+    component: HomePageServices,
   },
 ]
 

@@ -11,7 +11,7 @@
 
 <section class="mt-8 grid grid-cols-1 md:grid-cols-2 gap-6 items-center px-6 md:px-12 max-w-6xl mx-auto">
     <div>
-        <img src="/images/doctor-nurses.jpg" alt="doctor-nurses" class="w-full h-72 rounded-lg shadow-md" />
+        <img src="/images/doctors-group.jpg" alt="doctor-nurses" class="w-full h-74 rounded-lg shadow-md" />
     </div>
 
     <!-- Right Side (Content) -->
