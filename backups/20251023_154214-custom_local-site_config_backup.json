@@ -1,0 +1,12 @@
+{
+ "allow_cors": "*",
+ "db_name": "_48ccb2cb6a6b01a8",
+ "db_password": "51RjU0t2jyw6BlO3",
+ "db_type": "mariadb",
+ "encryption_key": "fI_7i84rAzdmuGWvQiPKTmA_znaPuamtSaxK3jRTTxw=",
+ "maintenance_mode": 0,
+ "push_relay_server_url": "https://push.frappe.io",
+ "user_type_doctype_limit": {
+  "employee_self_service": 40
+ }
+}
