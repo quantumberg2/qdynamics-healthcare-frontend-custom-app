@@ -85,13 +85,16 @@
         </div>
 
         <!-- Book Appointment -->
-        <div class="px-6 pb-6">
-          <button
-            class="w-full bg-[#1F2B6C] text-white font-semibold rounded-full py-2 border-2 border-[#1F2B6C]"
-          >
-            Book Appointment Now
-          </button>
-        </div>
+        <!-- Book Appointment -->
+<div class="px-6 pb-6">
+  <button
+    @click="bookAppointment"
+    class="w-full bg-[#1F2B6C] text-white font-semibold rounded-full py-2 border-2 border-[#1F2B6C]"
+  >
+    Book Appointment Now
+  </button>
+</div>
+
       </div>
     </div>
   </div>
@@ -130,6 +133,39 @@ export default {
         this.loading = false;
       }
     },
+    async fetchDoctor() {
+    this.loading = true;
+    try {
+      const doctorId = this.$route.params.id;
+      const res = await fetch(
+        `/api/method/healthcare_app.api.App_api.get_doctor?id=${doctorId}`
+      );
+
+      if (!res.ok) throw new Error("Failed to fetch doctor");
+
+      const data = await res.json();
+      this.doctor = data.message || null;
+    } catch (err) {
+      console.error("Error fetching doctor:", err);
+      this.error = "Unable to load doctor profile.";
+    } finally {
+      this.loading = false;
+    }
+  },
+
+bookAppointment() {
+  if (!this.doctor) return;
+
+  this.$router.push({
+    name: "AppointmentPage", // must match your router name
+    query: {
+      department: this.doctor.department,
+      doctor_id: this.doctor.name,
+      doctor_name: `${this.doctor.first_name || ''} ${this.doctor.last_name || ''}`.trim(),
+    },
+  });
+}
+
   },
 };
 </script>

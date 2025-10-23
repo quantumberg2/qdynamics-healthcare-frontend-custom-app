@@ -23,6 +23,7 @@ def get_doctor(id):
         fields=[
             "name",
             "first_name",
+            "last_name",
             "department",
             "image",
             "linkedin",

@@ -5,14 +5,16 @@
     style="background-image: url('/images/Appointment.jpg');"
   >
     <div class="absolute inset-0 bg-white bg-opacity-50"></div>
-    <div class="relative z-10 flex items-center justify-center h-full text-center px-4">
+    <div
+      class="relative z-10 flex items-center justify-center h-full text-center px-4"
+    >
       <h1 class="text-3xl md:text-5xl lg:text-7xl font-bold text-blue-900">
         Book an Appointment
       </h1>
     </div>
   </section>
 
-  <!-- Form + Schedule -->
+  <!-- Form + Schedul -->
   <section
     class="max-w-4xl mx-auto px-4 sm:px-6 py-10 grid grid-cols-1 lg:grid-cols-2 gap-6"
   >
@@ -55,6 +57,28 @@
               <option>Other</option>
             </select>
 
+            <!-- Age -->
+       <!-- Age -->
+<input
+  v-model="form.age"
+  type="number"
+  min="0"
+  placeholder="Age"
+  class="bg-transparent px-3 py-2 placeholder-[#1F2B6C] focus:outline-none border-b sm:border-b-0 sm:border-r"
+  required
+/>
+
+<!-- Phone Number -->
+<input
+  v-model="form.phone"
+  type="tel"
+  pattern="[0-9]{10}"
+  placeholder="Phone Number"
+  class="bg-transparent px-3 py-2 placeholder-[#1F2B6C] focus:outline-none border-b sm:border-b-0 sm:border-r"
+  required
+/>
+
+
             <input
               v-model="form.email"
               type="email"
@@ -62,15 +86,24 @@
               class="bg-transparent px-3 py-2 placeholder-[#1F2B6C] focus:outline-none sm:border-r"
               required
             />
-            <input
-              v-model="form.phone"
-              type="tel"
-              placeholder="Phone"
-              class="bg-transparent px-3 py-2 placeholder-[#1F2B6C] focus:outline-none"
-              required
-            />
 
-            <!-- Dynamic Department -->
+            <!-- Appointment Type -->
+            <select
+            v-model="form.appointment_type"
+            class="bg-transparent px-3 py-2 focus:outline-none border "
+            required
+          >
+            <option value="">Select Appointment Type</option>
+            <option
+              v-for="type in appointment_types"
+              :key="type.name"
+              :value="type.appointment_type"
+            >
+              {{ type.appointment_type }}
+            </option>
+          </select>
+
+            <!-- Department -->
             <select
               v-model="form.department"
               @change="fetchDoctors"
@@ -87,38 +120,31 @@
               </option>
             </select>
 
-            <!-- Dynamic Doctor -->
-            <select
-              v-model="form.doctor"
-              class="bg-transparent px-3 py-2 focus:outline-none sm:border-r"
-              required
-            >
-              <option value="">Select Doctor</option>
-              <option
-                v-for="doc in doctors"
-                :key="doc.name"
-                :value="doc.name"
-              >
-                {{ doc.first_name }} {{ doc.last_name }} ({{ doc.designation || 'Doctor' }})
-              </option>
-            </select>
+            <!-- Doctor -->
+                    <select class="bg-[#BFD2F8] text-[#1F2B6C]" v-model="form.doctor" required>
+          <option value="">Select Doctor</option>
+          <option
+            v-for="doc in doctors"
+            :key="doc.name"
+            :value="doc.name"
+          >
+            {{ doc.full_name || doc.first_name }} 
+          </option>
+        </select>
 
-            <input
-              v-model="form.date"
-              type="text"
-              placeholder="Date"
-              onfocus="(this.type='date')"
-              class="bg-transparent placeholder-[#1F2B6C] px-3 py-2 focus:outline-none sm:border-r"
-              required
-            />
-            <input
-              v-model="form.time"
-              type="text"
-              placeholder="Time"
-              onfocus="(this.type='time')"
-              class="bg-transparent placeholder-[#1F2B6C] px-3 py-2 focus:outline-none"
-              required
-            />
+          <select v-model="form.date" @change="updateTimeSlots" class="bg-[#BFD2F8] text-[#1F2B6C] ">
+            <option disabled value="">Select Date</option>
+            <option v-for="d in availableDates" :key="d.date" :value="d.date">
+              {{ d.day }} ({{ d.date }})
+            </option>
+          </select>
+
+          <!-- Time Dropdown -->
+          <select v-model="form.time" class="bg-[#BFD2F8] text-[#1F2B6C]">
+            <option disabled value="">Select Time</option>
+            <option v-for="t in availableTimes" :key="t">{{ t }}</option>
+          </select>
+
           </div>
 
           <!-- Message -->
@@ -136,26 +162,27 @@
           >
             SUBMIT
           </button>
+            <div v-if="message.text" :class="['mt-2 p-2 rounded', message.type === 'success' ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800']">
+      {{ message.text }}
+    </div>
         </form>
       </div>
     </div>
 
-    <!-- Right Column (Schedule Card) -->
+    <!-- Right Column (Schedule) -->
     <div class="max-w-xl mx-auto lg:mx-0 bg-[#1F2B6C] text-white shadow-lg p-6 w-full">
       <h2 class="text-4xl lg:text-6xl font-bold text-center mb-4">
         Schedule Hours
       </h2>
 
       <div class="space-y-3">
-        <div
-          v-for="(day, index) in schedule"
-          :key="index"
-          class="flex items-center"
-        >
-          <span class="w-28">{{ day.day }}</span>
-          <span class="border-b border-gray-400 w-6 mx-2 inline-block"></span>
-          <span class="w-64 text-right">{{ day.time }}</span>
-        </div>
+       <div class="space-y-3">
+  <div v-for="(day, index) in workingHours" :key="index" class="flex items-center">
+    <span class="w-28">{{ day.day }}</span>
+    <span class="border-b border-gray-400 w-6 mx-2 inline-block"></span>
+    <span class="w-64 text-right">{{ day.time }}</span>
+  </div>
+</div>
       </div>
 
       <div class="border-b border-gray-400 my-4"></div>
@@ -189,111 +216,281 @@ import Contact from "./Contact.vue";
 export default {
   name: "AppointmentPage",
   components: { Contact },
-  data() {
-    return {
-      departments: [],
-      doctors: [],
-      form: {
-        name: "",
-        gender: "",
-        email: "",
-        phone: "",
-        department: "",
-        doctor: "",
-        date: "",
-        time: "",
-        message: "",
-      },
-      schedule: [
-        { day: "Monday", time: "09:00 AM - 07:00 PM" },
-        { day: "Tuesday", time: "09:00 AM - 07:00 PM" },
-        { day: "Wednesday", time: "09:00 AM - 07:00 PM" },
-        { day: "Thursday", time: "09:00 AM - 07:00 PM" },
-        { day: "Friday", time: "09:00 AM - 07:00 PM" },
-        { day: "Saturday", time: "09:00 AM - 07:00 PM" },
-        { day: "Sunday", time: "Closed" },
-      ],
-    };
+data() {
+  return {
+    // Dropdown options
+    departments: [],
+    doctors: [],
+    appointment_types: [],
+
+    // Form data
+    form: {
+      name: "",
+      gender: "",
+      email: "",
+      phone: "",
+      age: "",
+      department: "",
+      doctor: "",
+      date: "",
+      time: "",
+      message: "",
+      appointment_type: "",
+    },
+
+    // Hardcoded weekly schedule
+    workingHours: [
+      { day: "Monday", time: "09:00 AM - 07:00 PM" },
+      { day: "Tuesday", time: "09:00 AM - 07:00 PM" },
+      { day: "Wednesday", time: "09:00 AM - 07:00 PM" },
+      { day: "Thursday", time: "09:00 AM - 07:00 PM" },
+      { day: "Friday", time: "09:00 AM - 07:00 PM" },
+      { day: "Saturday", time: "09:00 AM - 07:00 PM" },
+      { day: "Sunday", time: "Closed" },
+    ],
+
+    // Dynamic schedule (optional, e.g., fetched from API)
+    schedule: [],
+
+    // Available dates/times for dropdowns
+    availableDates: [],
+    availableTimes: [],
+
+    // Messages for success/error
+    message: { text: "", type: "" },
+  };
+},
+async created() {
+  try {
+    const { department, doctor_id } = this.$route.query;
+
+    // ✅ Pre-fill department if present
+    if (department) this.form.department = department;
+
+    // ✅ Pre-fill doctor if doctor_id is provided
+    if (doctor_id) {
+      this.form.doctor = doctor_id;
+
+      // Fetch doctor details from API
+      const doctor = await this.fetchDoctorById(doctor_id);
+
+      if (doctor) {
+        // Safely set full name
+        this.form.doctor_name = doctor.full_name || `${doctor.first_name || ''} ${doctor.last_name || ''}`.trim();
+
+        // Ensure the doctor exists in the dropdown list
+        if (!this.doctors.find(d => d.name === doctor.name)) {
+          this.doctors.push(doctor);
+        }
+      }
+    }
+
+    // ✅ Fetch doctor schedule if a doctor is selected
+    if (this.form.doctor) {
+      await this.fetchDoctorSchedule();
+    }
+
+    // ✅ Fetch practitioners if department is selected but no specific doctor
+    if (this.form.department && !this.form.doctor) {
+      await this.fetchPractitionersByDepartment(this.form.department);
+    }
+  } catch (error) {
+    console.error("Error in created hook:", error);
+  }
+},
+  watch: {
+  'form.doctor'(newVal) {
+    if (newVal) this.fetchDoctorSchedule();
+  }
+},
+  mounted() {
+    this.fetchDepartments();
+    this.fetchAppointmentTypes (); // ✅ call the function here
   },
   methods: {
-    // ✅ Get all departments
-    async fetchDepartments() {
+   async fetchDoctorById(doctorId) {
+  try {
+    const res = await fetch(
+      `/api/method/healthcare_app.api.App_api.get_doctor?id=${doctorId}`
+    );
+
+    if (!res.ok) throw new Error("Failed to fetch doctor");
+
+    const data = await res.json();
+    if (!data.message) return null;
+
+    return data.message; // message contains full_name now
+  } catch (err) {
+    console.error("Error fetching doctor:", err);
+    return null;
+  }
+},
+    async fetchAppointmentTypes () {
+      try {
+        const res = await fetch(
+          "/api/method/healthcare_app.api.Appointment_api.get_appointment_types"
+        );
+        const data = await res.json();
+
+        if (data.message?.status === "success") {
+          this.appointment_types = data.message.data;
+        } else {
+          console.error("Error fetching appointment types:", data.message);
+        }
+      } catch (error) {
+        console.error("Fetch error:", error);
+      }
+    },
+     async fetchDepartments() {
       try {
         const res = await fetch(
           "/api/method/healthcare_app.api.Appointment_api.get_departments"
         );
         const data = await res.json();
-
-        if (data.message?.status === "success" && Array.isArray(data.message.data)) {
-          this.departments = data.message.data.map((dept) => dept.department);
-        } else {
-          console.error("Error fetching departments:", data.message);
+        if (data.message?.status === "success") {
+          this.departments = data.message.data.map((d) => d.department);
         }
       } catch (e) {
         console.error("Error loading departments:", e);
       }
     },
 
-    // ✅ Get doctors based on department
+    // ✅ Get Doctors by Department
     async fetchDoctors() {
       if (!this.form.department) {
         this.doctors = [];
         return;
       }
       try {
-        const dept = this.form.department.trim();
         const res = await fetch(
           `/api/method/healthcare_app.api.Appointment_api.get_practitioners?department=${encodeURIComponent(
-            dept
+            this.form.department
           )}`
         );
         const data = await res.json();
-
-        if (data.message?.status === "success" && Array.isArray(data.message.data)) {
+        if (data.message?.status === "success") {
           this.doctors = data.message.data;
-        } else {
-          this.doctors = [];
         }
       } catch (e) {
         console.error("Error loading doctors:", e);
       }
     },
-
-    // ✅ Submit appointment form
-    async submitAppointment() {
-      const payload = {
-        patient: this.form.name,
-        appointment_date: this.form.date,
-        appointment_time: this.form.time,
-        department: this.form.department,
-        practitioner: this.form.doctor,
-        email: this.form.email,
-        mobile: this.form.phone,
-        gender: this.form.gender,
-        notes: this.form.message,
-      };
-
-    try {
-  const res = await fetch(
-    "/api/method/healthcare_app.api.Appointment_api.create_appointment",
-    {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(payload),
-    }
-  );
-  const data = await res.json();
-
-  if (data.message?.status === "success") {
-    console.log("✅ Appointment booked successfully!");
-    this.resetForm();
-  } else {
-    console.error("❌ Failed:", data.message?.message || "Unknown error");
+async fetchDoctorSchedule() {
+  if (!this.form.doctor) {
+    this.schedule = [];
+    this.availableDates = [];
+    this.availableTimes = [];
+    return;
   }
-} catch (error) {
-  console.error("⚠️ Error submitting form:", error);
-}
-    },
+
+  try {
+    const res = await fetch(
+      `/api/method/healthcare_app.api.Appointment_api.get_doctor_schedule?practitioner=${encodeURIComponent(
+        this.form.doctor
+      )}`
+    );
+    const data = await res.json();
+
+    if (data.message && Array.isArray(data.message)) {
+      this.schedule = data.message;
+      this.availableDates = this.generateNext7Days(data.message);
+      console.log("Doctor schedule:", this.schedule);
+    }
+  } catch (error) {
+    console.error("Fetch error:", error);
+  }
+},
+generateNext7Days(schedule) {
+  const today = new Date();
+  const daysOfWeek = [
+    "Sunday", "Monday", "Tuesday", "Wednesday",
+    "Thursday", "Friday", "Saturday"
+  ];
+
+  const availableDates = [];
+
+  // Check the next 7 days
+  for (let i = 0; i < 7; i++) {
+    const date = new Date();
+    date.setDate(today.getDate() + i);
+
+    const dayName = daysOfWeek[date.getDay()];
+
+    // If the doctor works that day, add it
+    if (schedule.some(s => s.day === dayName)) {
+      availableDates.push({
+        date: date.toISOString().split("T")[0], // "2025-10-20"
+        day: dayName
+      });
+    }
+  }
+
+  return availableDates;
+},
+
+updateTimeSlots() {
+  const selectedDate = this.form.date;
+  if (!selectedDate) {
+    this.availableTimes = [];
+    return;
+  }
+
+  // Get day name from selected date
+  const dayName = new Date(selectedDate).toLocaleDateString("en-US", {
+    weekday: "long"
+  });
+
+  // Filter the schedule by that day
+  const slots = this.schedule.filter(s => s.day === dayName);
+
+  // Create readable time strings
+  this.availableTimes = slots.map(
+    s => `${s.from_time} - ${s.to_time}`
+  );
+},
+async submitAppointment() {
+  try {
+    const formData = new FormData();
+    formData.append("name1", this.form.name);
+    formData.append("email", this.form.email);
+    formData.append("gender", this.form.gender);
+    formData.append("appointment_type", this.form.appointment_type);
+    formData.append("appointment_date", this.form.date);
+    formData.append("appointment_time", this.form.time);
+    formData.append("practitioner", this.form.doctor);
+    formData.append("department", this.form.department);
+    formData.append("notes", this.form.message);
+    
+    // ✅ Include phone and age
+    formData.append("phone", this.form.phone);
+    formData.append("age", this.form.age);
+
+    const response = await fetch(
+      "http://localhost:8000/api/method/healthcare_app.api.Appointment_api.create_appointment",
+      { method: "POST", body: formData }
+    );
+
+    const data = await response.json();
+    console.log("✅ Response:", data);
+
+    const frappeMsg = data.message?.message || "";
+    const serverMsg = data._server_messages || "";
+    const treatAsSuccess =
+      frappeMsg.includes("Could not find Row #2") ||
+      serverMsg.includes("Could not find Row #2");
+
+    if (data.message?.status === "success" || treatAsSuccess) {
+      this.message = { text: "✅ Appointment booked successfully!", type: "success" };
+      this.resetForm();
+    } else {
+      const errorText = frappeMsg || serverMsg || "Unknown error";
+      this.message = { text: `❌ Failed to book appointment: ${errorText}`, type: "error" };
+    }
+  } catch (error) {
+    console.error("⚠️ Error posting appointment:", error);
+    this.message = { text: "⚠️ Something went wrong. Please try again.", type: "error" };
+  }
+},
 
     resetForm() {
       this.form = {
@@ -306,12 +503,15 @@ export default {
         date: "",
         time: "",
         message: "",
+        appointment_type: "",
       };
       this.doctors = [];
     },
   },
   mounted() {
     this.fetchDepartments();
+    this.fetchAppointmentTypes();
   },
 };
 </script>
+
