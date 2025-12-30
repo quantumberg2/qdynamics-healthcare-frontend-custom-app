@@ -91,15 +91,21 @@
     </div>
   </div>
 
-  <Doctors />
+    <ServiceDoctor :department="department" />
 </template>
 
 <script>
-import Doctors from "./Doctors.vue";
+import ServiceDoctor from "./ServiceDoctor.vue";
 
 export default {
   name: "SingleServicePage",
-  components: { Doctors },
+  components: { ServiceDoctor },
+    props: {
+    department: {
+      type: String,
+      required: true
+    }
+  },
   data() {
     return {
       services: [],          // all services for left scrollable list
@@ -109,6 +115,8 @@ export default {
   async mounted() {
     await this.fetchServices();
     await this.fetchServiceByDepartment();
+        console.log("Department received:", this.department);
+
   },
   watch: {
     // If route changes, fetch new service dynamically

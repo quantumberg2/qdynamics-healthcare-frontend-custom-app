@@ -111,57 +111,7 @@
         </div>
     </div>
 </div>
-<section class="mt-4 relative w-full bg-cover bg-center" style="background-image: url('https://qtest.quantumberg.com/files/bgDoctor.png');">
-    <div class="absolute inset-0 bg-white bg-opacity-50"></div>
-
-    <div class="relative max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-2 items-center gap-8 px-6 py-12">
-        <!-- Left Side (Text) -->
-        <div>
-            <h2 class="text-[28px] font-bold text-[#1F2B6C] mb-4">
-                Book an Appointment
-            </h2>
-            <p class="text-gray-700 leading-relaxed">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque
-                placerat scelerisque tortor ornare ornare. Convallis felis vitae
-                tortor augue. Velit nascetur proin massa in. Consequat faucibus
-                porttitor enim et.
-            </p>
-        </div>
-
-        <!-- Right Side (Form) -->
-        <div class="w-full max-w-md bg-[#1F2B6C] text-white">
-            <form class="border">
-                <!-- Grid Inputs with Lines -->
-                <div class="grid grid-cols-2  ">
-                    <input type="text" placeholder="Name" class="bg-transparent px-3 py-2 placeholder-white focus:outline-none" />
-                    <select class="bg-transparent px-3 py-2 focus:outline-none">
-                        <option>Gender</option>
-                    </select>
-
-                    <input type="email" placeholder="Email" class="bg-transparent px-3 py-2 placeholder-white focus:outline-none" />
-                    <input type="tel" placeholder="Phone" class="bg-transparent px-3 py-2 placeholder-white focus:outline-none" />
-                    <select class="bg-transparent px-3 py-2 focus:outline-none">
-                        <option>Doctor</option>
-                    </select>
-                     <select class="bg-transparent px-3 py-2 focus:outline-none">
-                        <option>Department</option>
-                    </select>
-                    <input type="text" placeholder="Date" onfocus="(this.type='date')" class="bg-transparent placeholder-white px-3 py-2 focus:outline-none" />
-                    <input type="text" placeholder="Time" onfocus="(this.type='time')" class="bg-transparent placeholder-white px-3 py-2 focus:outline-none" />
-                 </div>
-
-                <!-- Message Box -->
-                <textarea placeholder="Message" rows="4" class="w-full bg-transparent placeholder-white px-3 py-2
-         outline-none focus:outline-none border-0 focus:border-0 focus:ring-0"></textarea>
-
-                <!-- Submit Button -->
-                <button type="submit" class="w-full bg-[#BFD2F8] text-[#1F2B6C] font-bold py-2 hover:bg-blue-400 transition-colors ">
-                    SUBMIT
-                </button>
-            </form>
-        </div>
-    </div>
-</section>
+<HomePageAppointment />
 <Doctors />
 <Contact />
 </template>
@@ -170,12 +120,14 @@
 import Doctors from './Doctors.vue'
 import Contact from './Contact.vue'
 import HomePageServices from './HomePageServices.vue'
+import HomePageAppointment from './HomePageAppointment.vue'
 export default {
     name: 'Home page',
     components: {
         Doctors,
         Contact,
-        HomePageServices
+        HomePageServices,
+        HomePageAppointment
     },
 
     data() {

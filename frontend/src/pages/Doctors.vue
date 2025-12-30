@@ -23,7 +23,7 @@
         <div class="bg-white rounded-lg shadow-md overflow-hidden flex flex-col">
           <!-- Image -->
           <img
-            :src="doctor.image || '/images/placeholder-doctor.jpg'"
+            :src="doctor.image || '/images/PlaceholderImages.png'"
             :alt="doctor.first_name"
             class="w-full h-64 object-cover"
             loading="lazy"

@@ -48,7 +48,7 @@ def get_appointment_types(department=None):
 #✅ Get Doctor Schedule
 import frappe
 
-@frappe.whitelist()
+@frappe.whitelist(allow_guest=True)
 def get_doctor_schedule(practitioner):
     """Return day and time slots for a given practitioner"""
     try:

@@ -21,7 +21,7 @@
     >
       <!-- Doctor Image -->
       <img
-  :src="doctor.image"
+  :src="doctor.image || '/images/PlaceholderImages.png'"
   :alt="doctor.first_name"
   class="w-full h-64"
   loading="lazy"

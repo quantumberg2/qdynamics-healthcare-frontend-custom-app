@@ -12,6 +12,8 @@ import SingleServicePage from './pages/SingleServicePage.vue'
 import BackToTop from './pages/BackToTop.vue'
 import ViewProfile from './pages/ViewProfile.vue'
 import HomePageServices from './pages/HomePageServices.vue'
+import HomePageAppointment from './pages/HomePageAppointment.vue'
+
 const routes = [
     {
     path: '/',
@@ -82,6 +84,11 @@ const routes = [
     name: 'HomePageServices',
     component: HomePageServices,
   },
+  {
+    path:'/homePageAppointment',
+    name:'HomePageAppointment',
+    component: HomePageAppointment,
+  }
 ]
 
 let router = createRouter({
