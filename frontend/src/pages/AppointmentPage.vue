@@ -450,47 +450,71 @@ updateTimeSlots() {
 },
 async submitAppointment() {
   try {
+    // -----------------------------
+    // Build FormData
+    // -----------------------------
     const formData = new FormData();
     formData.append("name1", this.form.name);
     formData.append("email", this.form.email);
     formData.append("gender", this.form.gender);
     formData.append("appointment_type", this.form.appointment_type);
     formData.append("appointment_date", this.form.date);
-    formData.append("appointment_time", this.form.time);
+    formData.append("appointment_time", this.form.time); // HH:MM:SS - HH:MM:SS
     formData.append("practitioner", this.form.doctor);
     formData.append("department", this.form.department);
-    formData.append("notes", this.form.message);
-    
-    // ✅ Include phone and age
+    formData.append("notes", this.form.message || "");
     formData.append("phone", this.form.phone);
     formData.append("age", this.form.age);
 
+    // -----------------------------
+    // API Call
+    // -----------------------------
     const response = await fetch(
-      "http://localhost:8000/api/method/healthcare_app.api.Appointment_api.create_appointment",
-      { method: "POST", body: formData }
+      "/api/method/healthcare_app.api.Appointment_api.create_appointment",
+      {
+        method: "POST",
+        body: formData
+      }
     );
 
     const data = await response.json();
-    console.log("✅ Response:", data);
+    console.log("✅ API Response:", data);
 
-    const frappeMsg = data.message?.message || "";
-    const serverMsg = data._server_messages || "";
-    const treatAsSuccess =
-      frappeMsg.includes("Could not find Row #2") ||
-      serverMsg.includes("Could not find Row #2");
+    // -----------------------------
+    // Normalize response (IMPORTANT)
+    // -----------------------------
+    const result = data.message || data;
 
-    if (data.message?.status === "success" || treatAsSuccess) {
-      this.message = { text: "✅ Appointment booked successfully!", type: "success" };
+    // -----------------------------
+    // SUCCESS
+    // -----------------------------
+    if (result.status === "success") {
+      this.message = {
+        text: "✅ Appointment booked successfully!",
+        type: "success"
+      };
       this.resetForm();
-    } else {
-      const errorText = frappeMsg || serverMsg || "Unknown error";
-      this.message = { text: `❌ Failed to book appointment: ${errorText}`, type: "error" };
+      return;
     }
+
+    // -----------------------------
+    // ERROR FROM API
+    // -----------------------------
+    this.message = {
+      text: `❌ Failed to book appointment: ${result.message || "Unknown error"}`,
+      type: "error"
+    };
+
   } catch (error) {
-    console.error("⚠️ Error posting appointment:", error);
-    this.message = { text: "⚠️ Something went wrong. Please try again.", type: "error" };
+    console.error("⚠️ Network/API Error:", error);
+    this.message = {
+      text: "⚠️ Something went wrong. Please try again.",
+      type: "error"
+    };
   }
 },
+
+
 
     resetForm() {
       this.form = {
