@@ -47,13 +47,13 @@
       <!-- Right Column - Content -->
       <div v-if="selectedService">
         <img
-          :src="selectedService.image || '/images/doctor-patient.jpg'"
+          :src="selectedService.custom_image || '/images/doctor-patient.jpg'"
           :alt="selectedService.department"
           class="w-full h-64 object-cover rounded-lg shadow-lg mb-4"
         />
 
         <p class="uppercase font-bold text-[20px] md:text-[24px] text-gray-900 mb-3">
-          {{ selectedService.tagline || 'A passion for putting patients first.' }}
+          {{ selectedService.custom_tagline || 'A passion for putting patients first.' }}
         </p>
 
         <ul class="grid grid-cols-2 gap-4 list-disc list-inside">
@@ -84,7 +84,7 @@
           </ul>
 
         <p class="text-gray-700 mt-3 text-sm md:text-base leading-relaxed">
-          {{ selectedService.description || 'Description not available.' }}
+          {{ selectedService.custom_description || 'Description not available.' }}
         </p>
       </div>
 

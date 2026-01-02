@@ -37,24 +37,24 @@
         <!-- Social Icons -->
         <div class="flex justify-center space-x-4 mt-2">
           <a
-            v-if="doctor.linkedin"
-            :href="doctor.linkedin"
+            v-if="doctor.custom_linkedin"
+            :href="doctor.custom_linkedin"
             target="_blank"
             class="text-gray-600 hover:text-blue-600"
           >
             <i class="fab fa-linkedin"></i>
           </a>
           <a
-            v-if="doctor.facebook"
-            :href="doctor.facebook"
+            v-if="doctor.custom_facebook"
+            :href="doctor.custom_facebook"
             target="_blank"
             class="text-gray-600 hover:text-blue-600"
           >
             <i class="fab fa-facebook"></i>
           </a>
           <a
-            v-if="doctor.twitter"
-            :href="doctor.twitter"
+            v-if="doctor.custom_twitter"
+            :href="doctor.custom_twitter"
             target="_blank"
             class="text-gray-600 hover:text-blue-600"
           >

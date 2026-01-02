@@ -41,9 +41,9 @@
 
             <!-- 🔗 Social Links -->
             <div class="flex justify-center space-x-4 mt-2 text-gray-600">
-              <a v-if="doctor.linkedin" :href="doctor.linkedin" target="_blank"><i class="fab fa-linkedin-in"></i></a>
-              <a v-if="doctor.facebook" :href="doctor.facebook" target="_blank"><i class="fab fa-facebook-f"></i></a>
-              <a v-if="doctor.twitter" :href="doctor.twitter" target="_blank"><i class="fab fa-twitter"></i></a>
+              <a v-if="doctor.custom_linkedin" :href="doctor.custom_linkedin" target="_blank"><i class="fab fa-linkedin-in"></i></a>
+              <a v-if="doctor.custom_facebook" :href="doctor.custom_facebook" target="_blank"><i class="fab fa-facebook-f"></i></a>
+              <a v-if="doctor.custom_twitter" :href="doctor.custom_twitter" target="_blank"><i class="fab fa-twitter"></i></a>
             </div>
           </div>
 

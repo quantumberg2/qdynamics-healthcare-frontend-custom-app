@@ -32,14 +32,14 @@
 
           <div class="flex-1 space-y-1">
             <h2 class="text-3xl font-bold text-gray-900">{{ doctor.first_name }}</h2>
-            <p class="text-[15px] font-semibold text-gray-700 font-medium ">{{ doctor.degree }}</p>
+            <p class="text-[15px] font-semibold text-gray-700 font-medium ">{{ doctor.custom_degree }}</p>
             <p class="text-[14px] text-black-700">Specialities in {{ doctor.department }}</p>
 
             <div class="border-t border-gray-200"></div>
 
             <div>
               <p class="font-semibold text-lg">Working At</p>
-              <p class="text-[14px] text-gray-800">{{ doctor.working_at || 'Not specified' }}</p>
+              <p class="text-[14px] text-gray-800">{{ doctor.custom_working_at || 'Not specified' }}</p>
             </div>
 
             <div class="border-t border-gray-200"></div>
@@ -64,7 +64,7 @@
             style="background: linear-gradient(to bottom, #1F2B6C, #BFD2F8);"
           >
             <p>Total Experience</p>
-            <p class="font-semibold">{{ doctor.experience || 'N/A' }}</p>
+            <p class="font-semibold">{{ doctor.custom_experience || 'N/A' }}</p>
           </div>
 
           <div
@@ -80,7 +80,7 @@
             style="background: linear-gradient(to bottom, #1F2B6C, #BFD2F8);"
           >
             <p>Joining Date</p>
-            <p class="font-semibold">{{ doctor.joining_date || 'N/A' }}</p>
+            <p class="font-semibold">{{ doctor.custom_joining_date || 'N/A' }}</p>
           </div>
         </div>
 
