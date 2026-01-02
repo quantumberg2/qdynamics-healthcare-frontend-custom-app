@@ -25,7 +25,7 @@
           <!-- 🩺 Image -->
           <div class="w-64 h-64 overflow-hidden bg-gray-100 flex justify-center items-start">
             <img
-              :src="doctor.image || '/images/PlaceholderImages.png'"
+              :src="doctor.image || '/files/PlaceholderImages.png'"
               :alt="doctor.first_name"
               class="object-top object-cover w-full h-full"
               loading="lazy"
@@ -68,7 +68,7 @@
       <div class="bg-white rounded-lg shadow-md overflow-hidden flex flex-col">
         <div class="w-full h-64 overflow-hidden bg-gray-100 flex justify-center items-start">
           <img
-            :src="filteredDoctors[0].image || '/images/PlaceholderImages.png'"
+            :src="filteredDoctors[0].image || '/files/PlaceholderImages.png'"
             :alt="filteredDoctors[0].first_name"
             class="object-top object-cover w-full h-full"
             loading="lazy"

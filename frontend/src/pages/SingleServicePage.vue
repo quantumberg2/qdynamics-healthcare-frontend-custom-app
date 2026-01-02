@@ -47,9 +47,9 @@
       <!-- Right Column - Content -->
       <div v-if="selectedService">
         <img
-          :src="selectedService.custom_image || '/images/doctor-patient.jpg'"
+          :src="selectedService.custom_image || '/files/doctor-patient.jpg'"
           :alt="selectedService.department"
-          class="w-full h-64 object-cover rounded-lg shadow-lg mb-4"
+          class="w-full h-72 object-cover rounded-lg shadow-lg mb-4"
         />
 
         <p class="uppercase font-bold text-[20px] md:text-[24px] text-gray-900 mb-3">

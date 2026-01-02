@@ -2,7 +2,7 @@
   <!-- Banner -->
   <section
     class="mt-8 relative w-full bg-cover h-72"
-    style="background-image: url('/images/Appointment.jpg');"
+    style="background-image: url('/files/Appointment.jpg');"
   >
     <div class="absolute inset-0 bg-white bg-opacity-50"></div>
     <div

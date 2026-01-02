@@ -1,7 +1,7 @@
 <template>
   <section
     class="mt-8 relative w-full bg-cover h-72"
-    style="background-image: url('/images/contactUs.png'); background-position: center 25%;"
+    style="background-image: url('/files/contactUs.png'); background-position: center 25%;"
   >
     <!-- White transparent overlay -->
     <div class="absolute inset-0 bg-white bg-opacity-50"></div>

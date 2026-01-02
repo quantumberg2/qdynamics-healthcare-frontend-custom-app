@@ -1,7 +1,7 @@
 <template>
   <section
     class="mt-8 relative w-full bg-cover h-72"
-    style="background-image: url('/images/DoctorsTeam.png'); background-position: center 25%;"
+    style="background-image: url('/files/DoctorsTeam.png'); background-position: center 25%;"
   >
     <!-- White transparent overlay -->
     <div class="absolute inset-0 bg-white bg-opacity-50"></div>
@@ -21,7 +21,7 @@
     >
       <!-- Doctor Image -->
       <img
-  :src="doctor.image || '/images/PlaceholderImages.png'"
+  :src="doctor.image || '/files/PlaceholderImages.png'"
   :alt="doctor.first_name"
   class="w-full h-64"
   loading="lazy"
@@ -81,7 +81,7 @@
 
   <section
     class="mb-3 relative w-full bg-cover bg-center h-80 flex items-center justify-center"
-    style="background-image: url('/images/DoctorHand.png');"
+    style="background-image: url('/files/DoctorHand.png');"
   >
     <!-- Overlay -->
     <div class="absolute inset-0 bg-[#1F2B6C] bg-opacity-70"></div>

@@ -2,7 +2,7 @@
   <!-- Hero Section -->
   <section
     class="mt-8 relative w-full bg-cover h-72"
-    style="background-image: url('/images/doctorpatient.png'); background-position: center 25%;"
+    style="background-image: url('/files/doctorpatient.png'); background-position: center 25%;"
   >
     <div class="absolute inset-0 bg-white bg-opacity-50"></div>
     <div class="relative z-10 flex items-center justify-center h-full">
@@ -23,7 +23,7 @@
         class="group bg-white rounded-lg shadow-md overflow-hidden cursor-pointer transition duration-300 hover:bg-blue-900 hover:text-white"
       >
         <img
-          :src="card.image ? card.image : '/images/doctor-patient.jpg'"
+          :src="card.custom_image ? card.custom_image : '/files/doctor-patient.jpg'"
           alt="Service"
           class="w-full h-48 object-cover transition duration-300 group-hover:opacity-30"
         />
@@ -75,7 +75,7 @@ const fetchServices = async () => {
       services.value = data.message.map((item) => ({
         department: item.department,
         description: item.description,
-        image: item.image || null, // Frappe API should return 'image' if available
+        custom_image: item.custom_image || null, // Frappe API should return 'image' if available
       }));
     } else {
       console.error("No data returned from API");
