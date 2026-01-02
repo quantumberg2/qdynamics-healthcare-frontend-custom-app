@@ -8,7 +8,7 @@ def get_services():
     try:
         departments = frappe.get_all(
             "Medical Department",
-            fields=["department", "description", "image", "tagline"]
+            fields=["department", "custom_description", "custom_image", "custom_tagline"]
         )
         return departments
     except Exception as e:
@@ -24,7 +24,7 @@ def get_service(department):
         service = frappe.get_all(
             "Medical Department",
             filters={"department": department},
-            fields=["department", "description", "image", "tagline"],
+            fields=["department", "custom_description", "custom_image", "custom_tagline"],
             limit=1
         )
         if service:
@@ -32,15 +32,15 @@ def get_service(department):
         # Fallback if department not found
         return {
             "department": department,
-            "description": "No information available",
-            "image": "",
-            "tagline": ""
+            "custom_description": "No information available",
+            "custom_image": "",
+            "custom_tagline": ""
         }
     except Exception as e:
         frappe.log_error(message=str(e), title="get_service API Error")
         return {
             "department": department,
-            "description": "No information available",
-            "image": "",
-            "tagline": ""
+            "custom_description": "No information available",
+            "custom_image": "",
+            "custom_tagline": ""
         }
