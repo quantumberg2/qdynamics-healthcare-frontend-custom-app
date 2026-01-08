@@ -5,146 +5,25 @@
     <div class="relative max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-2 items-center gap-8 px-6 py-12">
         <!-- Left Side (Text) -->
         <div>
-            <h2 class="text-[28px] font-bold text-[#1F2B6C] mb-4">
+          
+        </div>
+
+        <div class=" text-[#1F2B6C] overflow-hidden">
+        <h2 class="text-[28px] font-bold text-[#1F2B6C] mb-4">
                 Book an Appointment
             </h2>
             <p class="text-gray-700 leading-relaxed">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque
-                placerat scelerisque tortor ornare ornare. Convallis felis vitae
-                tortor augue. Velit nascetur proin massa in. Consequat faucibus
-                porttitor enim et.
+                 Schedule your appointment quickly and easily with our simple booking
+    process. Choose a convenient date and time, share your details, and get
+    connected with our experienced professionals. We ensure timely
+    consultations, personalized care, and a smooth experience from start to
+    finish.
             </p>
-        </div>
-
-        <div class="bg-[#BFD2F8] text-[#1F2B6C] overflow-hidden">
-        <form class="border border-blue-900" @submit.prevent="submitAppointment">
-          <div class="grid grid-cols-1 sm:grid-cols-2">
-            <input
-              v-model="form.name"
-              type="text"
-              placeholder="Name"
-              class="bg-transparent px-3 py-2 placeholder-[#1F2B6C] focus:outline-none sm:border-b-0 sm:border-r"
-              required
-            />
-
-            <select
-              v-model="form.gender"
-              class="bg-transparent px-3 py-2 focus:outline-none"
-              required
-            >
-              <option value="">Select Gender</option>
-              <option>Male</option>
-              <option>Female</option>
-              <option>Other</option>
-            </select>
-
-            <!-- Age -->
-       <!-- Age -->
-<input
-  v-model="form.age"
-  type="number"
-  min="0"
-  placeholder="Age"
-  class="bg-transparent px-3 py-2 placeholder-[#1F2B6C] focus:outline-none border-b sm:border-b-0 sm:border-r"
-  required
-/>
-
-<!-- Phone Number -->
-<input
-  v-model="form.phone"
-  type="tel"
-  pattern="[0-9]{10}"
-  placeholder="Phone Number"
-  class="bg-transparent px-3 py-2 placeholder-[#1F2B6C] focus:outline-none border-b sm:border-b-0 sm:border-r"
-  required
-/>
-            <input
-              v-model="form.email"
-              type="email"
-              placeholder="Email"
-              class="bg-transparent px-3 py-2 placeholder-[#1F2B6C] focus:outline-none sm:border-r"
-              required
-            />
-
-            <!-- Appointment Type -->
-            <select
-            v-model="form.appointment_type"
-            class="bg-transparent px-3 py-2 focus:outline-none border "
-            required
-          >
-            <option value="">Select Appointment Type</option>
-            <option
-              v-for="type in appointment_types"
-              :key="type.name"
-              :value="type.appointment_type"
-            >
-              {{ type.appointment_type }}
-            </option>
-          </select>
-
-            <!-- Department -->
-            <select
-              v-model="form.department"
-              @change="fetchDoctors"
-              class="bg-transparent px-3 py-2 focus:outline-none"
-              required
-            >
-              <option value="">Select Department</option>
-              <option
-                v-for="dept in departments"
-                :key="dept"
-                :value="dept"
-              >
-                {{ dept }}
-              </option>
-            </select>
-
-            <!-- Doctor -->
-                    <select class="bg-[#BFD2F8] text-[#1F2B6C]" v-model="form.doctor" required>
-          <option value="">Select Doctor</option>
-          <option
-            v-for="doc in doctors"
-            :key="doc.name"
-            :value="doc.name"
-          >
-            {{ doc.full_name || doc.first_name }} 
-          </option>
-        </select>
-
-          <select v-model="form.date" @change="updateTimeSlots" class="bg-[#BFD2F8] text-[#1F2B6C] ">
-            <option disabled value="">Select Date</option>
-            <option v-for="d in availableDates" :key="d.date" :value="d.date">
-              {{ d.day }} ({{ d.date }})
-            </option>
-          </select>
-
-          <!-- Time Dropdown -->
-          <select v-model="form.time" class="bg-[#BFD2F8] text-[#1F2B6C]">
-            <option disabled value="">Select Time</option>
-            <option v-for="t in availableTimes" :key="t">{{ t }}</option>
-          </select>
-
-          </div>
-
-          <!-- Message -->
-          <textarea
-            v-model="form.message"
-            placeholder="Message"
-            rows="4"
-            class="w-full bg-transparent placeholder-[#1F2B6C] px-3 py-2 outline-none border-none focus:outline-none focus:ring-0"
-          ></textarea>
-
-          <!-- Submit -->
-          <button
-            type="submit"
-            class="w-full bg-[#1F2B6C] text-[#BFD2F8] font-bold py-2 hover:bg-blue-400 transition-colors"
-          >
-            SUBMIT
-          </button>
-            <div v-if="message.text" :class="['mt-2 p-2 rounded', message.type === 'success' ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800']">
-      {{ message.text }}
-    </div>
-        </form>
+            <router-link to="/AppointmentPage">
+            <button class="mt-4 bg-[#1F2B6C] text-white px-6 py-2 rounded-lg hover:bg-[#0d1a4d] transition duration-300">
+                Book Appointment Now
+            </button>
+            </router-link>
       </div>
     </div>
   </section>

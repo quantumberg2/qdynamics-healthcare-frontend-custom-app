@@ -1,7 +1,7 @@
 <template>
   <section
     class="mt-8 relative w-full bg-cover h-72"
-    style="background-image: url('/images/DoctorsTeam.png'); background-position: center 25%;"
+    style="background-image: url('/files/DoctorsTeam.png'); background-position: center 25%;"
   >
     <div class="absolute inset-0 bg-white bg-opacity-50"></div>
     <div class="relative z-10 flex items-center justify-center h-full">

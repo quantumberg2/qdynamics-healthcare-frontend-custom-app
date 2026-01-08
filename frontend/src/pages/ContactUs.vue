@@ -29,14 +29,14 @@
             <input
               v-model="name"
               type="text"
-              placeholder="Name"
+              placeholder="Name *"
               class="bg-transparent px-3 py-2 placeholder-white border-b focus:outline-none"
               required
             />
             <input
               v-model="email"
               type="email"
-              placeholder="Email"
+              placeholder="Email *"
               class="bg-transparent px-3 py-2 placeholder-white border-b focus:outline-none"
               required
             />
@@ -45,7 +45,7 @@
           <input
             v-model="subject"
             type="text"
-            placeholder="Subject"
+            placeholder="Subject *"
             class="w-full bg-transparent px-3 py-2 placeholder-white border-b focus:outline-none"
             required
           />
@@ -53,7 +53,7 @@
           <!-- Message Box -->
           <textarea
             v-model="message"
-            placeholder="Message"
+            placeholder="Message *"
             rows="4"
             class="w-full bg-transparent placeholder-white px-3 py-2 outline-none border-none focus:outline-none focus:ring-0"
             required

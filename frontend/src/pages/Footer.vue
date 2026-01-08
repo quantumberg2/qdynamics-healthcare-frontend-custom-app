@@ -41,15 +41,29 @@
         </div>
 
         <!-- Newsletter -->
-        <div>
-            <h3 class="font-semibold mb-4">Newsletter</h3>
-            <div class="flex">
-                <input type="email" placeholder="Enter your email address" class="w-full px-3 py-2 rounded-l-md text-gray-900 focus:outline-none" />
-                <button class="bg-blue-600 px-4 rounded-r-md hover:bg-blue-700">
-                    <i class="fas fa-paper-plane"></i>
-                </button>
-            </div>
-        </div>
+     <div>
+  <h3 class="font-semibold mb-4">Newsletter</h3>
+
+  <!-- Newsletter -->
+  <div class="flex mb-3">
+    <input
+      type="email"
+      placeholder="Enter your email address"
+      class="w-full px-3 py-2 rounded-l-md text-gray-900 focus:outline-none"
+    />
+    <button class="bg-blue-600 px-4 rounded-r-md hover:bg-blue-700 text-white">
+      <i class="fas fa-paper-plane"></i>
+    </button>
+  </div>
+
+  <!-- Login Item -->
+  <a
+    href="/login"
+    class="block text-md text-white-600 hover:text-blue-800 font-medium"
+  >
+    🔐 Login
+  </a>
+</div>
     </div>
 
     <!-- Divider -->

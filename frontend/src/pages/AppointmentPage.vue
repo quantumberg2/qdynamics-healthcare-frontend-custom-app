@@ -41,7 +41,7 @@
             <input
               v-model="form.name"
               type="text"
-              placeholder="Name"
+              placeholder="Name *"
               class="bg-transparent px-3 py-2 placeholder-[#1F2B6C] focus:outline-none sm:border-b-0 sm:border-r"
               required
             />
@@ -51,7 +51,7 @@
               class="bg-transparent px-3 py-2 focus:outline-none"
               required
             >
-              <option value="">Select Gender</option>
+              <option value="">Select Gender *</option>
               <option>Male</option>
               <option>Female</option>
               <option>Other</option>
@@ -63,7 +63,7 @@
   v-model="form.age"
   type="number"
   min="0"
-  placeholder="Age"
+  placeholder="Age *"
   class="bg-transparent px-3 py-2 placeholder-[#1F2B6C] focus:outline-none border-b sm:border-b-0 sm:border-r"
   required
 />
@@ -73,7 +73,7 @@
   v-model="form.phone"
   type="tel"
   pattern="[0-9]{10}"
-  placeholder="Phone Number"
+  placeholder="Phone *"
   class="bg-transparent px-3 py-2 placeholder-[#1F2B6C] focus:outline-none border-b sm:border-b-0 sm:border-r"
   required
 />
@@ -82,7 +82,7 @@
             <input
               v-model="form.email"
               type="email"
-              placeholder="Email"
+              placeholder="Email *"
               class="bg-transparent px-3 py-2 placeholder-[#1F2B6C] focus:outline-none sm:border-r"
               required
             />
@@ -93,7 +93,7 @@
             class="bg-transparent px-3 py-2 focus:outline-none border "
             required
           >
-            <option value="">Select Appointment Type</option>
+            <option value="">Appointment Type *</option>
             <option
               v-for="type in appointment_types"
               :key="type.name"
@@ -110,7 +110,7 @@
               class="bg-transparent px-3 py-2 focus:outline-none"
               required
             >
-              <option value="">Select Department</option>
+              <option value="">Select Department *</option>
               <option
                 v-for="dept in departments"
                 :key="dept"
@@ -122,7 +122,7 @@
 
             <!-- Doctor -->
                     <select class="bg-[#BFD2F8] text-[#1F2B6C]" v-model="form.doctor" required>
-          <option value="">Select Doctor</option>
+          <option value="">Select Doctor *</option>
           <option
             v-for="doc in doctors"
             :key="doc.name"
@@ -133,7 +133,7 @@
         </select>
 
           <select v-model="form.date" @change="updateTimeSlots" class="bg-[#BFD2F8] text-[#1F2B6C] ">
-            <option disabled value="">Select Date</option>
+            <option disabled value="">Select Date *</option>
             <option v-for="d in availableDates" :key="d.date" :value="d.date">
               {{ d.day }} ({{ d.date }})
             </option>
@@ -141,7 +141,7 @@
 
           <!-- Time Dropdown -->
           <select v-model="form.time" class="bg-[#BFD2F8] text-[#1F2B6C]">
-            <option disabled value="">Select Time</option>
+            <option disabled value="">Select Time *</option>
             <option v-for="t in availableTimes" :key="t">{{ t }}</option>
           </select>
 
