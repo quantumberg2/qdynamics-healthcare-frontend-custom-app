@@ -157,11 +157,41 @@
 
           <!-- Submit -->
           <button
-            type="submit"
-            class="w-full bg-[#1F2B6C] text-[#BFD2F8] font-bold py-2 hover:bg-blue-400 transition-colors"
-          >
-            SUBMIT
-          </button>
+  type="submit"
+  :disabled="isLoading"
+  class="w-full flex items-center justify-center gap-2 
+         bg-[#1F2B6C] text-[#BFD2F8] font-bold py-2 
+         hover:bg-blue-400 transition-colors 
+         disabled:opacity-60 disabled:cursor-not-allowed"
+>
+  <!-- Loader -->
+  <svg
+    v-if="isLoading"
+    class="w-5 h-5 animate-spin text-[#BFD2F8]"
+    fill="none"
+    viewBox="0 0 24 24"
+  >
+    <circle
+      class="opacity-25"
+      cx="12"
+      cy="12"
+      r="10"
+      stroke="currentColor"
+      stroke-width="4"
+    />
+    <path
+      class="opacity-75"
+      fill="currentColor"
+      d="M4 12a8 8 0 018-8v4a4 4 0 00-4 4H4z"
+    />
+  </svg>
+
+  <!-- Text -->
+  <span>
+    {{ isLoading ? "Submitting..." : "SUBMIT" }}
+  </span>
+</button>
+
             <div v-if="message.text" :class="['mt-2 p-2 rounded', message.type === 'success' ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800']">
       {{ message.text }}
     </div>
@@ -218,6 +248,7 @@ export default {
   components: { Contact },
 data() {
   return {
+        isLoading: false,
     // Dropdown options
     departments: [],
     doctors: [],
@@ -449,72 +480,61 @@ updateTimeSlots() {
   );
 },
 async submitAppointment() {
-  try {
-    // -----------------------------
-    // Build FormData
-    // -----------------------------
-    const formData = new FormData();
-    formData.append("name1", this.form.name);
-    formData.append("email", this.form.email);
-    formData.append("gender", this.form.gender);
-    formData.append("appointment_type", this.form.appointment_type);
-    formData.append("appointment_date", this.form.date);
-    formData.append("appointment_time", this.form.time); // HH:MM:SS - HH:MM:SS
-    formData.append("practitioner", this.form.doctor);
-    formData.append("department", this.form.department);
-    formData.append("notes", this.form.message || "");
-    formData.append("phone", this.form.phone);
-    formData.append("age", this.form.age);
+  this.isLoading = true
 
-    // -----------------------------
-    // API Call
-    // -----------------------------
+  try {
+    const formData = new FormData()
+    formData.append("name1", this.form.name)
+    formData.append("email", this.form.email)
+    formData.append("gender", this.form.gender)
+    formData.append("appointment_type", this.form.appointment_type)
+    formData.append("appointment_date", this.form.date)
+    formData.append("appointment_time", this.form.time)
+    formData.append("practitioner", this.form.doctor)
+    formData.append("department", this.form.department)
+    formData.append("notes", this.form.message || "")
+    formData.append("phone", this.form.phone)
+    formData.append("age", this.form.age)
     const response = await fetch(
       "/api/method/healthcare_app.api.Appointment_api.create_appointment",
       {
         method: "POST",
         body: formData
       }
-    );
+    )
 
-    const data = await response.json();
-    console.log("✅ API Response:", data);
+    const data = await response.json()
+    console.log("✅ API Response:", data)
 
-    // -----------------------------
-    // Normalize response (IMPORTANT)
-    // -----------------------------
-    const result = data.message || data;
+    const result = data.message || data
 
-    // -----------------------------
-    // SUCCESS
-    // -----------------------------
     if (result.status === "success") {
-      this.message = {
-        text: "✅ Appointment booked successfully!",
-        type: "success"
-      };
-      this.resetForm();
-      return;
+      this.$router.push({
+        path: "/thank-you",
+        state: {
+          appointmentId: result.appointment_id,
+          appointmentDate: result.appointment_date,
+          appointmentTime: result.appointment_time
+        }
+      })
+      return
+    }
+    this.message = {
+      text: result.message || "Failed to book appointment",
+      type: "error"
     }
 
-    // -----------------------------
-    // ERROR FROM API
-    // -----------------------------
-    this.message = {
-      text: `❌ Failed to book appointment: ${result.message || "Unknown error"}`,
-      type: "error"
-    };
-
   } catch (error) {
-    console.error("⚠️ Network/API Error:", error);
+    console.error("Network/API Error:", error)
     this.message = {
-      text: "⚠️ Something went wrong. Please try again.",
+      text: "Something went wrong. Please try again.",
       type: "error"
-    };
+    }
+  } finally {
+    // ✅ALWAYS stop loading (success or fail)
+    this.isLoading = false
   }
 },
-
-
 
     resetForm() {
       this.form = {

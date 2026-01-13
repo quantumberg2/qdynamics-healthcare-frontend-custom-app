@@ -223,6 +223,8 @@ def create_appointment():
         return {
             "status": "success",
             "appointment_id": appointment.name,
+            "appointment_date": appointment.appointment_date,
+            "appointment_time": str(appointment.appointment_time),
             "patient": patient
         }
 

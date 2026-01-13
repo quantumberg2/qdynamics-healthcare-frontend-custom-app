@@ -13,6 +13,7 @@ import BackToTop from './pages/BackToTop.vue'
 import ViewProfile from './pages/ViewProfile.vue'
 import HomePageServices from './pages/HomePageServices.vue'
 import HomePageAppointment from './pages/HomePageAppointment.vue'
+import ThankYou from './pages/thankyou.vue'
 
 const routes = [
     {
@@ -88,6 +89,11 @@ const routes = [
     path:'/homePageAppointment',
     name:'HomePageAppointment',
     component: HomePageAppointment,
+  },
+   {
+    path: "/thank-you",
+    name: "ThankYou",
+    component: ThankYou,
   }
 ]
 
